@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Workstation: Professional Desktop Portfolio" />
+  <title>Uday Kiriti | Workstation v3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- BIOS Boot Screen -->
+  <div id="bios-screen">
+    <div id="bios-text"></div>
+  </div>
+
+  <div id="desktop">
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="icon" onclick="openWindow('window-about')">
+        <div class="icon-graphic">📂</div>
+        <div class="icon-label">My_Bio.txt</div>
+      </div>
+      <div class="icon" onclick="openWindow('window-projects')">
+        <div class="icon-graphic">📁</div>
+        <div class="icon-label">Projects</div>
+      </div>
+      <div class="icon" onclick="openWindow('window-terminal')">
+        <div class="icon-graphic">💻</div>
+        <div class="icon-label">Terminal</div>
+      </div>
+      <div class="icon" onclick="openWindow('window-photo')">
+        <div class="icon-graphic">🖼️</div>
+        <div class="icon-label">Portrait.asc</div>
+      </div>
+      <div class="icon" onclick="openWindow('window-settings')">
+        <div class="icon-graphic">⚙️</div>
+        <div class="icon-label">Settings</div>
+      </div>
+    </div>
+
+    <!-- Windows -->
+    <div id="window-settings" class="window hidden" style="top: 50px; left: 50px; width: 280px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">⚙️</span>
+          <span class="window-title">Control Panel</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-settings')">×</button>
+      </div>
+      <div class="window-content settings-content">
+        <div class="settings-group">
+          <label>DESKTOP THEME:</label>
+          <select id="theme-select" onchange="changeTheme(this.value)">
+            <option value="serenity">Serenity (Default)</option>
+            <option value="classic">Classic Green</option>
+            <option value="dark">Pro Dark</option>
+          </select>
+        </div>
+        <div class="settings-group">
+          <label>CRT SCANLINES:</label>
+          <button onclick="toggleScanlines()">[ TOGGLE ]</button>
+        </div>
+        <div class="settings-group">
+          <label>SYSTEM AUDIO:</label>
+          <input type="range" min="0" max="100" value="50" onchange="updateVolume(this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div id="window-about" class="window hidden" style="top: 100px; left: 250px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">📄</span>
+          <span class="window-title">My_Bio.txt - Notepad</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-about')">×</button>
+      </div>
+      <div class="window-content">
+        <p>User: Uday Kiriti</p>
+        <p>Role: Software Developer</p>
+        <p>Specialization: C++, Systems Design, Web Architectures.</p>
+        <hr>
+        <p>I build robust systems with an eye for classic aesthetics and modern performance.</p>
+      </div>
+    </div>
+
+    <div id="window-projects" class="window hidden" style="top: 150px; left: 300px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">📁</span>
+          <span class="window-title">Projects</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-projects')">×</button>
+      </div>
+      <div class="window-content">
+        <div class="file-grid">
+          <!-- Dynamically populated from GitHub -->
+        </div>
+      </div>
+    </div>
+
+    <div id="window-terminal" class="window" style="top: 80px; left: 350px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">💻</span>
+          <span class="window-title">Command Prompt</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-terminal')">×</button>
+      </div>
+      <div class="window-content terminal-content">
+        <div id="terminal-output">Welcome to Workstation v3.0</div>
+        <div class="terminal-input-line">
+          <span class="prompt">></span>
+          <input type="text" id="terminal-input" spellcheck="false">
+        </div>
+      </div>
+    </div>
+
+    <div id="window-photo" class="window hidden" style="top: 120px; left: 400px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">🖼️</span>
+          <span class="window-title">Portrait.asc - Image Viewer</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-photo')">×</button>
+      </div>
+      <div class="window-content portrait-content">
+        <pre id="ascii-portrait">
+   _   _ ____   _______   __
+  | | | |  _ \ / \ \ \ \ / /
+  | | | | | | / _ \ \ \ V / 
+  | |_| | |_ / ___ \ \ | |  
+   \___/|____/_/   \_\_|_|  
+        </pre>
+        <p style="text-align:center; font-size:12px;">(ASCII Rendering: portrait.sys)</p>
+      </div>
+    </div>
+
+    <!-- Screensaver Canvas -->
+    <canvas id="screensaver" class="hidden"></canvas>
+
+    <!-- Window: Media Player -->
+    <div id="window-media" class="window hidden" style="top: 200px; left: 50px; width: 220px;">
+      <div class="window-header">
+        <div class="window-title-group">
+          <span class="window-icon">📻</span>
+          <span class="window-title">Media Player</span>
+        </div>
+        <button class="window-close" onclick="closeWindow('window-media')">×</button>
+      </div>
+      <div class="window-content player-content">
+        <div class="player-display">
+          <div class="player-status">STOPPED</div>
+          <div class="player-track">LO-FI_BEATS.MID</div>
+          <div class="player-visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button onclick="toggleMusic()">[PLAY]</button>
+          <button onclick="stopMusic()">[STOP]</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Note -->
+    <div id="sticky-note" class="window" style="top: 40px; right: 20px; min-width: 180px; width: 180px;">
+      <div class="window-header note-header">
+        <span class="window-title">STATUS.LOG</span>
+      </div>
+      <div class="window-content note-content">
+        <p><b>LEARNING:</b><br>Systems Design</p>
+        <p><b>STATUS:</b><br>Building GUI...</p>
+      </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="hidden">
+      <div class="start-sidebar"><span>START</span></div>
+      <div class="start-items">
+        <div class="start-item" onclick="openWindow('window-terminal')"><span>💻</span> Terminal</div>
+        <div class="start-item" onclick="openWindow('window-about')"><span>📄</span> About Me</div>
+        <div class="start-item" onclick="openWindow('window-projects')"><span>📁</span> Projects</div>
+        <hr>
+        <div class="start-item" onclick="location.reload()"><span>🔄</span> Restart</div>
+      </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+      <button id="start-btn" onclick="toggleStartMenu()">
+        <span class="start-icon">💠</span> Start
+      </button>
+      
+      <div class="quick-launch">
+        <div class="ql-icon" onclick="openWindow('window-terminal')" title="Terminal">💻</div>
+        <div class="ql-icon" onclick="openWindow('window-about')" title="About Me">📂</div>
+        <div class="ql-icon" onclick="openWindow('window-projects')" title="Projects">📁</div>
+        <div class="ql-icon" onclick="openWindow('window-photo')" title="Image Viewer">🖼️</div>
+        <div class="ql-icon" onclick="openWindow('window-media')" title="Media Player">📻</div>
+      </div>
+
+      <div class="taskbar-divider"></div>
+      <div class="taskbar-items" id="taskbar-tabs"></div>
+      
+      <div class="system-tray">
+        <div class="tray-icon" title="System Volume">🔊</div>
+        <div id="network-light" title="Network Activity"></div>
+        <div id="clock">12:00 PM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Overlays -->
+  <div id="gsod" class="hidden">
+    <div class="gsod-content"><h1>*** CRITICAL_ERROR ***</h1><p>REBOOTING IN: <span id="reboot-timer">10</span>s</p></div>
+  </div>
+
+  <div id="credits-container" class="hidden">
+    <div class="credits-content">
+      <div class="credits-title">SYSTEM CREDITS</div>
+      <p>Created by Uday Kiriti</p>
+      <p>Spring-Boot | React </p>
+      <p>C | C++ | Rust</p>
+      <p>Machine Learning | python | Deep Learning</p>
+      <p>Thank you for visiting!</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
