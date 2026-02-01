@@ -1,0 +1,303 @@
+/* =====================================================
+   Portfolio OS v3.0 - Layout Styles
+   Desktop, Panel, Icons
+   ===================================================== */
+
+/* Boot Screen */
+#bios-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #33ff33;
+    z-index: 10000;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    padding: 24px;
+    line-height: 1.6;
+}
+
+#bios-screen div {
+    opacity: 0;
+    animation: fadeIn 0.1s forwards;
+}
+
+/* Desktop Icons */
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 48px 16px 16px;
+    width: 100px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.icon:hover,
+.icon:focus {
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.icon:active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.icon-graphic {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.icon-graphic svg {
+    width: 40px;
+    height: 40px;
+    fill: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.icon-label {
+    font-size: 11px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    word-break: break-word;
+    font-family: var(--font-mono);
+}
+
+/* Top Panel */
+#taskbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: var(--panel-bg);
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
+}
+
+#start-btn {
+    display: flex;
+    align-items: center;
+    padding: 4px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font-system);
+    transition: background 0.15s;
+}
+
+#start-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 8px;
+}
+
+.taskbar-items {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    justify-content: center;
+}
+
+.taskbar-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.15s;
+}
+
+.taskbar-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.taskbar-tab.active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.taskbar-tab.minimized {
+    opacity: 0.5;
+}
+
+.taskbar-tab svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* System Tray */
+.system-tray {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px;
+    margin-left: auto;
+}
+
+.tray-icon {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+
+.tray-icon:hover {
+    opacity: 1;
+}
+
+.tray-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+}
+
+#network-light {
+    width: 6px;
+    height: 6px;
+    background: #666;
+    border-radius: 50%;
+}
+
+#network-light.active {
+    background: #27c93f;
+    box-shadow: 0 0 6px #27c93f;
+    animation: pulse 0.5s infinite;
+}
+
+#clock {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Application Menu */
+#start-menu {
+    position: fixed;
+    top: 32px;
+    left: 0;
+    width: 320px;
+    background: #2d2d2d;
+    border: 1px solid var(--win-border-dark);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+.start-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+    color: #000;
+}
+
+.start-avatar {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.start-user {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.start-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4px 0;
+}
+
+.start-items {
+    padding: 8px 0;
+}
+
+.start-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-primary);
+    transition: background 0.15s;
+}
+
+.start-item:hover,
+.start-item:focus {
+    background: rgba(255, 255, 255, 0.08);
+    outline: none;
+}
+
+.start-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-secondary);
+}
+
+.start-item:hover .start-icon svg {
+    fill: var(--accent-color);
+}
+
+.start-item.shutdown {
+    color: #ff6b6b;
+}
+
+.start-item.shutdown .start-icon svg {
+    fill: #ff6b6b;
+}
+
+.start-item.shutdown:hover {
+    background: rgba(255, 107, 107, 0.15);
+}
